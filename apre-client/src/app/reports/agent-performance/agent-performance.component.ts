@@ -11,11 +11,11 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-agent-performance',
   standalone: true,
   imports: [RouterOutlet],
-  template: `
-    <router-outlet />
-  `,
-  styles: ``
+  template: ` <router-outlet /> `,
+  styles: ``,
 })
 export class AgentPerformanceComponent {
-
+  onStartDateSelected(testDate: Date) {
+    throw new Error('Method not implemented.');
+  }
 }
