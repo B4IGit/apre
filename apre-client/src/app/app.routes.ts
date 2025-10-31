@@ -18,6 +18,7 @@ import { UsersComponent } from './admin/user-management/users/users.component';
 import { UserDetailsComponent } from './admin/user-management/user-details/user-details.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { UserCreateComponent } from './admin/user-management/user-create/user-create.component';
+import { SalesByProductCustomerComponent } from './reports/sales/sales-by-product-customer/sales-by-product-customer.component';
 import { SalesByRegionComponent } from './reports/sales/sales-by-region/sales-by-region.component';
 import { SalesComponent } from './reports/sales/sales.component';
 import { AgentPerformanceComponent } from './reports/agent-performance/agent-performance.component';
@@ -31,48 +32,52 @@ export const userManagementRoutes: Routes = [
   {
     path: '',
     redirectTo: 'users',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'users',
-    component: UsersComponent
+    component: UsersComponent,
   },
   {
     path: 'users/new',
-    component: UserCreateComponent
+    component: UserCreateComponent,
   },
   {
     path: 'users/:id',
-    component: UserDetailsComponent
-  }
-]
+    component: UserDetailsComponent,
+  },
+];
 
 // Sales reports routes
 export const salesReportRoutes: Routes = [
   {
     path: 'sales-by-region',
-    component: SalesByRegionComponent
+    component: SalesByRegionComponent,
   },
   {
     path: 'sales-by-region-tabular',
-    component: SalesByRegionTabularComponent
-  }
+    component: SalesByRegionTabularComponent,
+  },
+  {
+    path: 'sales-by-product-customer',
+    component: SalesByProductCustomerComponent,
+  },
 ];
 
 // Agent performance routes
 export const agentPerformanceRoutes: Routes = [
   {
     path: 'call-duration-by-date-range',
-    component: CallDurationByDateRangeComponent
-  }
+    component: CallDurationByDateRangeComponent,
+  },
 ];
 
 // Customer feedback routes
 export const customerFeedbackRoutes: Routes = [
   {
     path: 'channel-rating-by-month',
-    component: ChannelRatingByMonthComponent
-  }
+    component: ChannelRatingByMonthComponent,
+  },
 ];
 
 // Export the routes
@@ -83,45 +88,45 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: DashboardComponent
+        component: DashboardComponent,
       },
       {
         path: 'demo',
-        component: DemoComponent
+        component: DemoComponent,
       },
       {
         path: 'support',
-        component: SupportComponent
+        component: SupportComponent,
       },
       {
         path: 'faq',
-        component: FaqComponent
+        component: FaqComponent,
       },
       {
         path: 'user-management',
         component: UserManagementComponent,
-        children: userManagementRoutes
+        children: userManagementRoutes,
       },
       {
         path: 'reports/sales',
         component: SalesComponent,
-        children: salesReportRoutes
+        children: salesReportRoutes,
       },
       {
         path: 'reports/agent-performance',
         component: AgentPerformanceComponent,
-        children: agentPerformanceRoutes
+        children: agentPerformanceRoutes,
       },
       {
         path: 'reports/customer-feedback',
         component: CustomerFeedbackComponent,
-        children: customerFeedbackRoutes
-      }
+        children: customerFeedbackRoutes,
+      },
     ],
-    canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
     path: 'signin',
-    component: SigninComponent
-  }
+    component: SigninComponent,
+  },
 ];
