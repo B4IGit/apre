@@ -81,15 +81,47 @@ router.get("/regions/:region", (req, res, next) => {
   }
 });
 
-// Follow along in class
-LOCALHOST: 3000 / api / reports / sales / sales - by - month / april;
-LOCALHOST: 3000 / api / reports / sales / sales - by - month / foo;
-LOCALHOST: 3000 / api / reports / sales / sales - by - month / bar;
+/**
+ * @description
+ *
+ * GET /sales-by-product-customer:product
+ *
+ * Fetches sale data grouped by product and customer.
+ *
+ * Example:
+ * fetch('/sales-by-product/')
+ *  .then(response => response.json())
+ *  .then(data => console.log(data));
+ */
 
-router.get("", (req, res, next) => {
+router.get("/sales-by-product/:product", (req, res, next) => {
   try {
+    mongo(async (db) => {
+      const salesReportByProduct = await db
+        .collection("sales")
+        .aggregate([
+          { $match: { product: req.params.product } },
+          {
+            $group: {
+              _id: { product: "$product", customer: "$customer" },
+            },
+          },
+          {
+            project: {
+              _id: 0,
+              product: "$_id.product",
+              customer: "$_id.customer",
+            },
+          },
+          {
+            $sort: { product: 1, customer: 1 },
+          },
+        ])
+        .toArray();
+      res.send(salesReportByProduct);
+    }, next);
   } catch (err) {
-    console.error("err", err);
+    console.error("Error getting sales data for product/customer.", err);
     next(err);
   }
 });
