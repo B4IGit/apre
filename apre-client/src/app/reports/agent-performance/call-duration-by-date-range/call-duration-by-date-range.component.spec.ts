@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CallDurationByDateRangeComponent } from './call-duration-by-date-range.component';
+import { By } from '@angular/platform-browser';
 
 describe('CallDurationByDateRangeComponent', () => {
   let component: CallDurationByDateRangeComponent;
@@ -8,9 +9,8 @@ describe('CallDurationByDateRangeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, CallDurationByDateRangeComponent] // Import CallDurationByDateRangeComponent
-    })
-    .compileComponents();
+      imports: [HttpClientTestingModule, CallDurationByDateRangeComponent], // Import CallDurationByDateRangeComponent
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CallDurationByDateRangeComponent);
     component = fixture.componentInstance;
@@ -41,5 +41,14 @@ describe('CallDurationByDateRangeComponent', () => {
     component.startDate = testStartDate; // Set a valid start date
     component.onEndDateSelected(testEndDate);
     expect(component.endDate).toEqual(testEndDate);
+  });
+
+  it('should render a submit button with the text "Get Data"', () => {
+    const durationButton = fixture.debugElement.query(
+      By.css('.calendar-form__actions button'),
+    );
+
+    const buttonEl = durationButton.nativeElement as HTMLButtonElement;
+    expect(buttonEl.textContent).toContain('Get Data');
   });
 });
