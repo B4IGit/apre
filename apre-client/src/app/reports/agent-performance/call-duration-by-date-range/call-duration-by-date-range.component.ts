@@ -4,11 +4,19 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ChartComponent } from '../../../shared/chart/chart.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-call-duration-by-date-range',
   standalone: true,
-  imports: [CalendarComponent, CommonModule, ChartComponent],
+  imports: [
+    CalendarComponent,
+    CommonModule,
+    ChartComponent,
+    MatTooltipModule,
+    MatButtonModule,
+  ],
   providers: [DatePipe],
   template: `
     <div>
@@ -32,6 +40,10 @@ import { environment } from '../../../../environments/environment';
         </div>
         <div class="calendar-form__actions">
           <button
+            mat-raised-button
+            matTooltip="Click to fetch data"
+            matTooltipPosition="above"
+            aria-label="Button that displays a tooltip when focused or hovered over "
             class="button button--primary"
             (click)="fetchPerformanceData()"
           >
