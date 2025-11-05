@@ -12,12 +12,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, RouterLink],
-  template: `
-    <router-outlet />
-  `,
-styles: `
-
-`
+  template: ` <router-outlet /> `,
+  styles: ``,
 })
-export class AppComponent {
-}
+export class AppComponent {}
