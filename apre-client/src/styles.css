@@ -46,8 +46,8 @@ body {
 }
 
 .button--primary {
-  background-color: #20c997;
-  color: white;
+  background-color: #20c997 !important;
+  color: white !important;
 }
 
 .button--primary:hover {
