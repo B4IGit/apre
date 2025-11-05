@@ -84,7 +84,33 @@ router.get("/regions/:region", (req, res, next) => {
 /**
  * @description
  *
- * GET /sales-by-product-customer:product
+ * GET /sales-by-product-customer
+ *
+ * Fetches a list of products/customer data.
+ *
+ * Example:
+ * fetch('/sales-by-product-customer')
+ *  .then(response => response.json())
+ *  .then(data => console.log(data));
+ */
+router.get("/sales-by-product-customer", (req, res, next) => {
+  try {
+    mongo(async (db) => {
+      const salesByProductCustomer = await db
+        .collection("sales")
+        .distinct("product");
+      res.send(salesByProductCustomer);
+    }, next);
+  } catch (err) {
+    console.error("Error getting products: ", err);
+    next(err);
+  }
+});
+
+/**
+ * @description
+ *
+ * GET /products:product
  *
  * Fetches sale data grouped by product and customer.
  *
@@ -94,31 +120,33 @@ router.get("/regions/:region", (req, res, next) => {
  *  .then(data => console.log(data));
  */
 
-router.get("/sales-by-product/:product", (req, res, next) => {
+router.get("/sales-by-product-customer/:product", (req, res, next) => {
   try {
     mongo(async (db) => {
-      const salesReportByProduct = await db
+      const salesReportByProductCustomer = await db
         .collection("sales")
         .aggregate([
           { $match: { product: req.params.product } },
           {
             $group: {
               _id: { product: "$product", customer: "$customer" },
+              totalSales: { $sum: "$amount" },
             },
           },
           {
-            project: {
+            $project: {
               _id: 0,
               product: "$_id.product",
               customer: "$_id.customer",
+              totalSales: 1,
             },
           },
           {
-            $sort: { product: 1, customer: 1 },
+            $sort: { customer: 1 },
           },
         ])
         .toArray();
-      res.send(salesReportByProduct);
+      res.send(salesReportByProductCustomer);
     }, next);
   } catch (err) {
     console.error("Error getting sales data for product/customer.", err);
