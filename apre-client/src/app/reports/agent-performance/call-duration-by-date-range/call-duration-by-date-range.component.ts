@@ -7,6 +7,10 @@ import { environment } from '../../../../environments/environment';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 
+/*
+ * Imported the API { MatToolTipModule } for Angular Material to access tooltip
+ * */
+
 @Component({
   selector: 'app-call-duration-by-date-range',
   standalone: true,
@@ -39,6 +43,7 @@ import { MatButtonModule } from '@angular/material/button';
           </div>
         </div>
         <div class="calendar-form__actions">
+          <!-- Displays a button with a tooltip when focused or hovered over - uses Angular Material API: https://material.angular.dev/components/tooltip/api -->
           <button
             mat-raised-button
             matTooltip="Click to fetch data"
