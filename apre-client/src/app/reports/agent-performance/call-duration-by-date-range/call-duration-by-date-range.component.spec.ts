@@ -51,4 +51,24 @@ describe('CallDurationByDateRangeComponent', () => {
     const buttonEl = durationButton.nativeElement as HTMLButtonElement;
     expect(buttonEl.textContent).toContain('Get Data');
   });
+
+  it('should have a tooltip with that renders "Click to fetch data" ', () => {
+    const toolTipBtn =
+      fixture.debugElement.nativeElement.querySelector('button');
+    expect(toolTipBtn.getAttribute('ng-reflect-message')).toBe(
+      'Click to fetch data',
+    );
+  });
+
+  it('should position tooltip above the button', () => {
+    const toolTipBtn =
+      fixture.debugElement.nativeElement.querySelector('button');
+    expect(toolTipBtn.getAttribute('ng-reflect-position')).toBe('above');
+  });
+
+  it('should display button with the correct color', () => {
+    const buttonColor =
+      fixture.debugElement.nativeElement.querySelector('button');
+    expect(buttonColor.classList).toContain('button--primary');
+  });
 });
