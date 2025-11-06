@@ -24,6 +24,7 @@ import { TableComponent } from './../../../shared/table/table.component';
             }
           </select>
         </div>
+
         <div class="form__actions">
           <button class="button button--primary" type="submit">Submit</button>
         </div>
@@ -62,7 +63,7 @@ import { TableComponent } from './../../../shared/table/table.component';
   ],
 })
 export class SalesByProductCustomerComponent implements AfterViewInit {
-  // Array of distinct product names loaded from the API
+  // Array of product names from sales collection
   products: string[] = [];
 
   // Table headers and rows for the TableComponent
