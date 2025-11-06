@@ -86,7 +86,6 @@ router.get("/regions/:region", (req, res, next) => {
  *
  * GET /sales-by-product-customer
  *
- * Fetches a list of products/customer data.
  *
  * Example:
  * fetch('/sales-by-product-customer')
@@ -96,10 +95,8 @@ router.get("/regions/:region", (req, res, next) => {
 router.get("/sales-by-product-customer", (req, res, next) => {
   try {
     mongo(async (db) => {
-      const salesByProductCustomer = await db
-        .collection("sales")
-        .distinct("product");
-      res.send(salesByProductCustomer);
+      const products = await db.collection("sales").distinct("product");
+      res.send(products);
     }, next);
   } catch (err) {
     console.error("Error getting products: ", err);
