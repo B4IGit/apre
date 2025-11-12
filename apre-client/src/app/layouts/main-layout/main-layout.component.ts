@@ -356,6 +356,10 @@ export class MainLayoutComponent {
       name: 'Call Duration by Date Range',
       url: '/reports/agent-performance/call-duration-by-date-range',
     },
+    {
+      name: 'Call Duration by Date Range - Tabular',
+      url: '/reports/agent-performance/call-duration-by-date-range-tabular',
+    },
     // Add more reports as needed
   ];
 
