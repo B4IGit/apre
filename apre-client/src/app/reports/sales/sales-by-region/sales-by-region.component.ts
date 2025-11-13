@@ -26,7 +26,7 @@ import { ChartComponent } from '../../../shared/chart/chart.component';
           </select>
         </div>
         <div class="form__actions">
-          // Changed button color to secondary 11/12/2025 - DL
+          <!-- Changed button color to secondary 11/12/2025 - DL -->
           <button class="button button--secondary" type="submit">Submit</button>
         </div>
       </form>
